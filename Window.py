@@ -1,26 +1,21 @@
 from PySide6 import QtCore
-from PySide6.QtWidgets import QApplication, QGraphicsBlurEffect, QMainWindow, QListWidget, QStackedWidget, QVBoxLayout, QWidget, QSplitter, QLabel
+from PySide6.QtWidgets import QApplication, QMainWindow, QListWidget, QStackedWidget, QStyleFactory, QVBoxLayout, QWidget, QHBoxLayout
 from PySide6.QtCore import Qt
-from general import GeneralPage
-
-
+from src.pages.General import GeneralPage
+from src.pages.Appearance import AppearancePage
 
 class MainWindow(QMainWindow):
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
-
         self.setWindowTitle("Hyprland Settings")
 
-        splitter = QSplitter(Qt.Horizontal)
-
         self.sidebar = QListWidget()
-        self.OPTIONS = ["General", "Decoration", "Animations", "Input", "Misc", "Binds", "Debug", "Monitor", "Option 9", "Option 10"]
+        self.OPTIONS = ["General", "Appearance", "Animations", "Input", "Misc", "Binds", "Debug", "Monitor"]
         self.sidebar.addItems(self.OPTIONS)
         self.sidebar.setFixedWidth(self.width() // 4)
-        self.sidebar.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.sidebar.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         self.sidebar.setStyleSheet("""
             QListWidget {
-                background-color: rgba(249, 247, 245, 127);
                 color: black;
                 padding: 10px;
                 font-size: 16px;
@@ -47,31 +42,38 @@ class MainWindow(QMainWindow):
                 color: black;
             }
         """)
-        splitter.addWidget(self.sidebar)
 
+        self.mainArea = QStackedWidget()
 
-    
-        self.main_area = QStackedWidget()
         for option in self.OPTIONS:
             if option == "General":
                 page = GeneralPage()
+            elif option == "Appearance":
+                page = AppearancePage()
             else:
                 page = QWidget()
                 layout = QVBoxLayout()
-                label = QLabel(option)
-                layout.addWidget(label)
                 page.setLayout(layout)
-            self.main_area.addWidget(page)
-        self.sidebar.currentRowChanged.connect(self.main_area.setCurrentIndex)
+            self.mainArea.addWidget(page)
+        self.sidebar.currentRowChanged.connect(self.mainArea.setCurrentIndex)
 
-        splitter.addWidget(self.main_area)
+        self.hLayout = QHBoxLayout()
+        self.hLayout.addWidget(self.sidebar)
+        self.hLayout.addWidget(self.mainArea)
 
-        splitter.setStretchFactor(0, 0)
-        splitter.setStretchFactor(1, 1)
-
-        self.setCentralWidget(splitter)
+        centralWidget = QWidget()
+        centralWidget.setLayout(self.hLayout)
+        self.setCentralWidget(centralWidget)
 
 app = QApplication([])
+app.setStyleSheet("""
+                  * {
+                      background-color: #f6f6f6;
+                      padding: 0;
+                      margin: 0;
+                      font-family: "Segoe UI", sans-serif;
+                      }
+                  """)
 window = MainWindow()
 window.show()
 app.exec_()
