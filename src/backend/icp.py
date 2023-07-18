@@ -3,13 +3,13 @@ import inspect
 import asyncio
 
 
-class Backend:
-    def get_conf(self):
+class IPCWrapper:
+    def getUserConf(self):
         self.conf = asyncio.run(hyprland.Config.from_conf())
         return self.conf
 
-    def make_tabs(self):
-        conf = self.get_conf()
+    def makeTabs(self):
+        conf = self.getUserConf()
         tabs = {}
         for section in hyprland.Config.get_sections():
             options = inspect.getmembers(getattr(conf, section), lambda a:not(inspect.isroutine(a)))
@@ -22,17 +22,6 @@ class Backend:
                 tabs[section].append((setting, value, doc))
         return tabs
     
-    def update_conf(self,section,setting,value):
-        setattr(getattr(self.conf,section),setting.replace('.','__'),value)
 
 
 
-backend = Backend()
-conf = backend.get_conf()
-
-for section in hyprland.Config.get_sections():
-        print(f"[{section}]")
-        options = inspect.getmembers(getattr(conf, section), lambda a:not(inspect.isroutine(a)))
-        options = [a for a in options if not(a[0].startswith('__') and a[0].endswith('__'))]
-        for setting, value in options:
-            print(f"{setting} = {value}")

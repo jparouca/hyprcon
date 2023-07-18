@@ -3,11 +3,14 @@ from PySide6.QtWidgets import QApplication, QMainWindow, QListWidget, QStackedWi
 from PySide6.QtCore import Qt
 from src.pages.General import GeneralPage
 from src.pages.Appearance import AppearancePage
+from src.backend.icp import IPCWrapper
 
 class MainWindow(QMainWindow):
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
         self.setWindowTitle("Hyprland Settings")
+
+        self.ICP = IPCWrapper()
 
         self.sidebar = QListWidget()
         self.OPTIONS = ["General", "Appearance", "Animations", "Input", "Misc", "Binds", "Debug", "Monitor"]
@@ -47,7 +50,7 @@ class MainWindow(QMainWindow):
 
         for option in self.OPTIONS:
             if option == "General":
-                page = GeneralPage()
+                page = GeneralPage(self.ICP)
             elif option == "Appearance":
                 page = AppearancePage()
             else:
