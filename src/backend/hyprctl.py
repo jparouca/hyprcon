@@ -3,12 +3,12 @@ import subprocess
 
 
 class HyprctlWrapper:
-    def get_option(self, section, option):
+    def get_option(self, section, option, dataType):
         result = subprocess.run(['hyprctl', '-j', f'getoption {section}:{option}'], capture_output=True, text=True)
         if result.returncode == 0:
             try:
                 data = json.loads(result.stdout)
-                return int(data.get('int'))
+                return (data.get(dataType))
             except json.JSONDecodeError:
                 return 0
         else:
