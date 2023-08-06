@@ -69,9 +69,12 @@ app = QApplication([])
 app.setStyleSheet("""
                   * {
                       background-color: #f6f6f6;
-                      padding: 0;
-                      margin: 0;
                       font-family: "Segoe UI", sans-serif;
+                      }
+
+                  QGroupBox {
+                      font-size: 14px;
+                      font-weight: semi-bold;
                       }
                   """)
 window = MainWindow()
