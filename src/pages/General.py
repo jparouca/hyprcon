@@ -55,7 +55,7 @@ class GeneralPage(QMainWindow):
         else:
             combo.setCurrentIndex(0)
 
-        combo.currentTextChanged.connect(lambda: self.hyprctl.set_option(SECTION, "no_border_on_floating", combo.currentText() == "True"))
+        combo.currentTextChanged.connect(lambda: self.hyprctl.set_option(SECTION, "no_border_on_floating",  combo.currentText()))
 
 
 
