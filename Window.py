@@ -1,5 +1,4 @@
-from PySide6 import QtCore
-from PySide6.QtWidgets import QApplication, QMainWindow, QListWidget, QStackedWidget, QStyleFactory, QVBoxLayout, QWidget, QHBoxLayout
+from PySide6.QtWidgets import QApplication, QMainWindow, QListWidget, QStackedWidget, QVBoxLayout, QWidget, QHBoxLayout
 from PySide6.QtCore import Qt
 from src.pages.General import GeneralPage
 from src.pages.Appearance import AppearancePage
@@ -7,7 +6,6 @@ from src.pages.Appearance import AppearancePage
 class MainWindow(QMainWindow):
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
-        self.setWindowTitle("Hyprland Settings")
 
         self.sidebar = QListWidget()
         self.OPTIONS = ["General", "Appearance", "Animations", "Input", "Misc", "Binds", "Debug", "Monitor"]
@@ -68,7 +66,8 @@ class MainWindow(QMainWindow):
 app = QApplication([])
 app.setStyleSheet("""
                   * {
-                      background-color: #f6f6f6;
+                      background: #fff;
+
                       font-family: "Segoe UI", sans-serif;
                       }
 
@@ -76,7 +75,44 @@ app.setStyleSheet("""
                       font-size: 14px;
                       font-weight: semi-bold;
                       }
-                  """)
+                  QListWidget {
+                      border: none;
+                      font-weight: semi-bold;
+                      }
+
+                  QStackedWidget {
+                      border-left: 1px solid #E9D7FE;
+                      border-top: 1px solid #E9D7FE;
+                      border-top-left-radius: 10px;
+                      }
+                  QSlide {
+                      height: 100px;
+
+                      }
+                  QSlider::groove {
+                      border: 1px solid #999;
+                      height: 6px;
+                      background: #999999;
+                      margin: 0 12px;
+                      }
+
+                  QSlider::sub-page {
+                      background: #9E77ED;
+                      }
+
+                  QSlider::add-page {
+                      background: #999999;
+                      }
+
+                  QSlider::handle:horizontal {
+                      background-color: #fff;
+                      border-radius: 999px;
+                      border: 2px solid #D6BBFB;
+                      width: 15px;
+                      height: 100px;
+                      margin: -24px -12px;
+                      }
+                      """)
 window = MainWindow()
 window.show()
 app.exec_()

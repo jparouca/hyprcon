@@ -1,48 +1,52 @@
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QApplication, QCheckBox, QDoubleSpinBox, QFormLayout, QLineEdit, QSizePolicy, QSpacerItem, QVBoxLayout, QGroupBox, QLabel,  QWidget
-from ..backend.lib import QSpinBox, QDoubleSpinBox
+from PySide6.QtWidgets import QApplication, QCheckBox, QDoubleSpinBox,  QLineEdit, QMainWindow, QSizePolicy, QSlider, QSpacerItem, QSpinBox, QVBoxLayout, QGroupBox, QLabel,  QWidget
+from ..backend.hyprctl import HyprctlWrapper
 
-class AppearancePage(QWidget):
+
+SECTION = "decoration"
+
+class AppearancePage(QMainWindow):
     def __init__(self, parent=None):
         super(AppearancePage, self).__init__(parent)
+        self.hyprctl = HyprctlWrapper()
 
-        self.mainLayout = QVBoxLayout(self)
-        
-        cornersGroup = self.create_corners_group()
-        opacityGroup = self.create_opacity_group()
-        blur_group = self.create_blur_group()
-        shadowGroup = self.create_shadow_group()
+        mainWidget = QWidget()
+        self.mainLayout = QVBoxLayout(mainWidget)
+        self.setCentralWidget(mainWidget)
 
-        self.mainLayout.addWidget(cornersGroup)
-        self.mainLayout.addWidget(opacityGroup)
-        self.mainLayout.addWidget(blur_group)
-        self.mainLayout.addWidget(shadowGroup)
+        pageTitle = QLabel("Appearance")
+        pageTitle.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        pageTitle.setStyleSheet("font-size: 20px; color: #344054; font-weight: semi-bold; margin-bottom: 20px;")
 
-        self.mainLayout.addStretch(1)
-        self.mainLayout.setAlignment(Qt.AlignmentFlag.AlignLeft)
+        self.mainLayout.addWidget(pageTitle)
+        self.mainLayout.addWidget(self.antialiasingAndOpacityGroup())
 
+        self.mainLayout.addItem(QSpacerItem(0, 0, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding))
 
-
-    def create_corners_group(self):
-        group = QGroupBox("Corners")
+    def antialiasingAndOpacityGroup(self):
+        group = QGroupBox("Antialiasing and Opacity")
         layout = QVBoxLayout()
 
-        layout.addItem(QSpacerItem(20, 24, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding))
-        # Rounding option
-        rounding_label = QLabel("Rounded corners’ radius (in layout px)")
-        rounding_spinbox = QSpinBox()
-        rounding_spinbox.setValue(0)
-        layout.addWidget(rounding_label)
-        layout.addWidget(rounding_spinbox)
+        # multisample_edges
+        multisampleEdgesCheckbox = QCheckBox("Enable antialiasing (no-jaggies) for rounded corners")
+        multisampleEdgesCheckbox.setChecked(bool(self.hyprctl.get_option(SECTION, "multisample_edges", 'int')))
+        multisampleEdgesCheckbox.stateChanged.connect(lambda state: self.hyprctl.set_option(SECTION, "multisample_edges", state == Qt.CheckState.Checked))
+        layout.addWidget(multisampleEdgesCheckbox)
 
-        # Multisample edges option
-        multisample_edges_checkbox = QCheckBox("Enable antialiasing (no-jaggies) for rounded corners")
-        multisample_edges_checkbox.setChecked(True)
-        layout.addWidget(multisample_edges_checkbox)
+        # active_opacity, inactive_opacity, fullscreen_opacity
+        for opacity_option, description in zip(['active_opacity', 'inactive_opacity', 'fullscreen_opacity'],
+                                               ['Opacity of active windows', 'Opacity of inactive windows', 'Opacity of fullscreen windows']):
+            opacitySlider = QSlider(Qt.Orientation.Horizontal)
+            opacitySlider.setRange(0, 100)
+            opacitySlider.setValue(int(float(self.hyprctl.get_option(SECTION, opacity_option, 'float')) * 100))
+            opacitySlider.valueChanged.connect(lambda value, option=opacity_option: self.hyprctl.set_option(SECTION, option, value / 100.0))
+            layout.addWidget(QLabel(description))
+            layout.addWidget(opacitySlider)
 
         group.setLayout(layout)
-
         return group
+
+
 
 
     def create_opacity_group(self):

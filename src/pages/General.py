@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import (QApplication, QCheckBox, QDoubleSpinBox, QGridLayout, QGroupBox, QMainWindow, QVBoxLayout, QHBoxLayout,
+from PySide6.QtWidgets import (QApplication, QCheckBox, QDoubleSpinBox,  QGroupBox, QMainWindow, QVBoxLayout, QHBoxLayout,
                                QWidget, QLabel, QSlider, QComboBox, QSpacerItem, QSizePolicy)
 from PySide6.QtCore import Qt
 import sys
@@ -31,7 +31,6 @@ class GeneralPage(QMainWindow):
 
     def mouseInteractionGroup(self):
         group = QGroupBox("Mouse Interaction and Sensitivity")
-        group.setStyleSheet("title {font-size: 15px; font-weight: semi-bold}")
         layout = QVBoxLayout()
 
         # Sensitivity Option
@@ -100,7 +99,7 @@ class GeneralPage(QMainWindow):
         defaultLayoutLabel = QLabel("Default window layout:")
         defaultLayoutComboBox = QComboBox()
         defaultLayoutComboBox.addItems(["dwindle", "master"])
-        defaultLayoutComboBox.setCurrentText(self.hyprctl.get_option(SECTION, "layout", 'str'))
+        defaultLayoutComboBox.setCurrentText(str(self.hyprctl.get_option(SECTION, "layout", 'str')))
         defaultLayoutComboBox.currentTextChanged.connect(lambda text: self.hyprctl.set_option(SECTION, "layout", text))
         defaultLayoutHBox = QHBoxLayout()
         defaultLayoutHBox.addWidget(defaultLayoutLabel)
