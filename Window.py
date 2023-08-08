@@ -80,8 +80,8 @@ app.setStyleSheet("""
 
                       }
                   QStackedWidget {
-                      border-left: 1px solid #E9D7FE;
-                      border-top: 1px solid #E9D7FE;
+                      border-left: 1px solid #B3B8DB;
+                      border-top: 1px solid #B3B8DB;
                       border-top-left-radius: 10px;
                       }
                   QSlide {
