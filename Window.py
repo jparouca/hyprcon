@@ -3,13 +3,14 @@ from PySide6.QtWidgets import QApplication, QLabel, QListWidgetItem, QMainWindow
 from PySide6.QtCore import Qt
 from src.pages.General import GeneralPage
 from src.pages.Appearance import AppearancePage
+from src.pages.Input import InputPage
+
 
 generalIcon = QIcon("./src/assets/cog-outline.svg")
 appearanceIcon = QIcon("./src/assets/brush-outline.svg")
 inputIcon = QIcon("./src/assets/keypad-outline.svg")
 debugIcon = QIcon("./src/assets/bug-outline.svg")
 monitorIcon = QIcon("./src/assets/desktop-outline.svg")
-
 
 
 class MainWindow(QMainWindow):
@@ -30,6 +31,8 @@ class MainWindow(QMainWindow):
                 page = GeneralPage()
             elif option == "Appearance":
                 page = AppearancePage()
+            elif option == "Input":
+                page = InputPage()
             else:
                 page = QWidget()
                 layout = QVBoxLayout()

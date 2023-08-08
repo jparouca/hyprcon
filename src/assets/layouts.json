@@ -1,0 +1,705 @@
+{
+  "af": [
+    "fa-olpc",
+    "ps",
+    "ps-olpc",
+    "uz",
+    "uz-olpc"
+  ],
+  "al": [
+    "plisi",
+    "veqilharxhi"
+  ],
+  "am": [
+    "eastern",
+    "eastern-alt",
+    "phonetic",
+    "phonetic-alt",
+    "western"
+  ],
+  "ara": [
+    "azerty",
+    "azerty_digits",
+    "buckwalter",
+    "digits",
+    "mac",
+    "olpc",
+    "qwerty",
+    "qwerty_digits"
+  ],
+  "at": [
+    "mac",
+    "nodeadkeys"
+  ],
+  "au": [
+    ""
+  ],
+  "az": [
+    "cyrillic"
+  ],
+  "ba": [
+    "alternatequotes",
+    "unicode",
+    "unicodeus",
+    "us"
+  ],
+  "bd": [
+    "probhat"
+  ],
+  "be": [
+    "iso-alternate",
+    "nodeadkeys",
+    "oss",
+    "oss_latin9",
+    "wang"
+  ],
+  "bg": [
+    "bas_phonetic",
+    "bekl",
+    "phonetic"
+  ],
+  "br": [
+    "dvorak",
+    "nativo",
+    "nativo-epo",
+    "nativo-us",
+    "nodeadkeys",
+    "rus",
+    "thinkpad"
+  ],
+  "brai": [
+    "left_hand",
+    "left_hand_invert",
+    "right_hand",
+    "right_hand_invert"
+  ],
+  "bt": [
+    ""
+  ],
+  "bw": [
+    ""
+  ],
+  "by": [
+    "intl",
+    "latin",
+    "legacy",
+    "phonetic",
+    "ru"
+  ],
+  "ca": [
+    "eng",
+    "fr-dvorak",
+    "fr-legacy",
+    "ike",
+    "multix"
+  ],
+  "cd": [
+    ""
+  ],
+  "ch": [
+    "de_mac",
+    "de_nodeadkeys",
+    "fr",
+    "fr_mac",
+    "fr_nodeadkeys",
+    "legacy"
+  ],
+  "cm": [
+    "azerty",
+    "dvorak",
+    "french",
+    "mmuock",
+    "qwerty"
+  ],
+  "cn": [
+    "altgr-pinyin",
+    "mon_manchu_galik",
+    "mon_todo_galik",
+    "mon_trad",
+    "mon_trad_galik",
+    "mon_trad_manchu",
+    "mon_trad_todo",
+    "mon_trad_xibe",
+    "tib",
+    "tib_asciinum",
+    "ug"
+  ],
+  "custom": [
+    ""
+  ],
+  "cz": [
+    "bksl",
+    "dvorak-ucw",
+    "qwerty",
+    "qwerty-mac",
+    "qwerty_bksl",
+    "rus",
+    "ucw",
+    "winkeys",
+    "winkeys-qwerty"
+  ],
+  "de": [
+    "T3",
+    "deadacute",
+    "deadgraveacute",
+    "deadtilde",
+    "dsb",
+    "dsb_qwertz",
+    "dvorak",
+    "e1",
+    "e2",
+    "mac",
+    "mac_nodeadkeys",
+    "neo",
+    "nodeadkeys",
+    "qwerty",
+    "ro",
+    "ro_nodeadkeys",
+    "ru",
+    "tr",
+    "us"
+  ],
+  "dk": [
+    "dvorak",
+    "mac",
+    "mac_nodeadkeys",
+    "nodeadkeys",
+    "winkeys"
+  ],
+  "dz": [
+    "ar",
+    "azerty-deadkeys",
+    "ber",
+    "qwerty-gb-deadkeys",
+    "qwerty-us-deadkeys"
+  ],
+  "ee": [
+    "dvorak",
+    "nodeadkeys",
+    "us"
+  ],
+  "epo": [
+    "legacy"
+  ],
+  "es": [
+    "ast",
+    "cat",
+    "deadtilde",
+    "dvorak",
+    "nodeadkeys",
+    "winkeys"
+  ],
+  "et": [
+    ""
+  ],
+  "fi": [
+    "classic",
+    "mac",
+    "nodeadkeys",
+    "smi",
+    "winkeys"
+  ],
+  "fo": [
+    "nodeadkeys"
+  ],
+  "fr": [
+    "afnor",
+    "azerty",
+    "bepo",
+    "bepo_afnor",
+    "bepo_latin9",
+    "bre",
+    "dvorak",
+    "geo",
+    "latin9",
+    "latin9_nodeadkeys",
+    "mac",
+    "nodeadkeys",
+    "oci",
+    "oss",
+    "oss_latin9",
+    "oss_nodeadkeys",
+    "us"
+  ],
+  "gb": [
+    "colemak",
+    "colemak_dh",
+    "dvorak",
+    "dvorakukp",
+    "extd",
+    "gla",
+    "intl",
+    "mac",
+    "mac_intl",
+    "pl"
+  ],
+  "ge": [
+    "ergonomic",
+    "mess",
+    "os",
+    "ru"
+  ],
+  "gh": [
+    "akan",
+    "avn",
+    "ewe",
+    "fula",
+    "ga",
+    "generic",
+    "gillbt",
+    "hausa"
+  ],
+  "gn": [
+    ""
+  ],
+  "gr": [
+    "extended",
+    "nodeadkeys",
+    "polytonic",
+    "simple"
+  ],
+  "hr": [
+    "alternatequotes",
+    "unicode",
+    "unicodeus",
+    "us"
+  ],
+  "hu": [
+    "101_qwerty_comma_dead",
+    "101_qwerty_comma_nodead",
+    "101_qwerty_dot_dead",
+    "101_qwerty_dot_nodead",
+    "101_qwertz_comma_dead",
+    "101_qwertz_comma_nodead",
+    "101_qwertz_dot_dead",
+    "101_qwertz_dot_nodead",
+    "102_qwerty_comma_dead",
+    "102_qwerty_comma_nodead",
+    "102_qwerty_dot_dead",
+    "102_qwerty_dot_nodead",
+    "102_qwertz_comma_dead",
+    "102_qwertz_comma_nodead",
+    "102_qwertz_dot_dead",
+    "102_qwertz_dot_nodead",
+    "nodeadkeys",
+    "qwerty",
+    "standard"
+  ],
+  "id": [
+    "javanese",
+    "melayu-phonetic",
+    "melayu-phoneticx",
+    "pegon-phonetic"
+  ],
+  "ie": [
+    "CloGaelach",
+    "UnicodeExpert",
+    "ogam",
+    "ogam_is434"
+  ],
+  "il": [
+    "biblical",
+    "lyx",
+    "phonetic"
+  ],
+  "in": [
+    "ben",
+    "ben_baishakhi",
+    "ben_bornona",
+    "ben_gitanjali",
+    "ben_inscript",
+    "ben_probhat",
+    "bolnagri",
+    "eeyek",
+    "eng",
+    "guj",
+    "guj-kagapa",
+    "guru",
+    "hin-kagapa",
+    "hin-wx",
+    "iipa",
+    "jhelum",
+    "kan",
+    "kan-kagapa",
+    "mal",
+    "mal_enhanced",
+    "mal_lalitha",
+    "mal_poorna",
+    "mar-kagapa",
+    "marathi",
+    "olck",
+    "ori",
+    "ori-bolnagri",
+    "ori-wx",
+    "san-kagapa",
+    "tam",
+    "tam_tamilnumbers",
+    "tamilnet",
+    "tamilnet_TAB",
+    "tamilnet_TSCII",
+    "tamilnet_tamilnumbers",
+    "tel",
+    "tel-kagapa",
+    "tel-sarala",
+    "urd-phonetic",
+    "urd-phonetic3",
+    "urd-winkeys"
+  ],
+  "iq": [
+    "ku",
+    "ku_alt",
+    "ku_ara",
+    "ku_f"
+  ],
+  "ir": [
+    "azb",
+    "ku",
+    "ku_alt",
+    "ku_ara",
+    "ku_f",
+    "pes_keypad",
+    "winkeys"
+  ],
+  "is": [
+    "dvorak",
+    "mac",
+    "mac_legacy"
+  ],
+  "it": [
+    "fur",
+    "geo",
+    "ibm",
+    "intl",
+    "mac",
+    "nodeadkeys",
+    "scn",
+    "us",
+    "winkeys"
+  ],
+  "jp": [
+    "OADG109A",
+    "dvorak",
+    "kana",
+    "kana86",
+    "mac"
+  ],
+  "ke": [
+    "kik"
+  ],
+  "kg": [
+    "phonetic"
+  ],
+  "kh": [
+    ""
+  ],
+  "kr": [
+    "kr104"
+  ],
+  "kz": [
+    "ext",
+    "kazrus",
+    "latin",
+    "ruskaz"
+  ],
+  "la": [
+    "stea"
+  ],
+  "latam": [
+    "colemak",
+    "deadtilde",
+    "dvorak",
+    "nodeadkeys"
+  ],
+  "lk": [
+    "tam_TAB",
+    "tam_unicode",
+    "us"
+  ],
+  "lt": [
+    "ibm",
+    "lekp",
+    "lekpa",
+    "ratise",
+    "sgs",
+    "std",
+    "us"
+  ],
+  "lv": [
+    "adapted",
+    "apostrophe",
+    "ergonomic",
+    "fkey",
+    "modern",
+    "modern-cyr",
+    "tilde"
+  ],
+  "ma": [
+    "french",
+    "rif",
+    "tifinagh",
+    "tifinagh-alt",
+    "tifinagh-alt-phonetic",
+    "tifinagh-extended",
+    "tifinagh-extended-phonetic",
+    "tifinagh-phonetic"
+  ],
+  "mao": [
+    ""
+  ],
+  "md": [
+    "gag"
+  ],
+  "me": [
+    "cyrillic",
+    "cyrillicalternatequotes",
+    "cyrillicyz",
+    "latinalternatequotes",
+    "latinunicode",
+    "latinunicodeyz",
+    "latinyz"
+  ],
+  "mk": [
+    "nodeadkeys"
+  ],
+  "ml": [
+    "fr-oss",
+    "us-intl",
+    "us-mac"
+  ],
+  "mm": [
+    "mnw",
+    "mnw-a1",
+    "shn",
+    "zawgyi",
+    "zgt"
+  ],
+  "mn": [
+    ""
+  ],
+  "mt": [
+    "alt-gb",
+    "alt-us",
+    "us"
+  ],
+  "mv": [
+    ""
+  ],
+  "my": [
+    "phonetic"
+  ],
+  "ng": [
+    "hausa",
+    "igbo",
+    "yoruba"
+  ],
+  "nl": [
+    "mac",
+    "std",
+    "us"
+  ],
+  "no": [
+    "colemak",
+    "colemak_dh",
+    "colemak_dh_wide",
+    "dvorak",
+    "mac",
+    "mac_nodeadkeys",
+    "nodeadkeys",
+    "smi",
+    "smi_nodeadkeys",
+    "winkeys"
+  ],
+  "np": [
+    ""
+  ],
+  "ph": [
+    "capewell-dvorak",
+    "capewell-dvorak-bay",
+    "capewell-qwerf2k6",
+    "capewell-qwerf2k6-bay",
+    "colemak",
+    "colemak-bay",
+    "dvorak",
+    "dvorak-bay",
+    "qwerty-bay"
+  ],
+  "pk": [
+    "ara",
+    "snd",
+    "urd-crulp",
+    "urd-nla"
+  ],
+  "pl": [
+    "csb",
+    "dvorak",
+    "dvorak_altquotes",
+    "dvorak_quotes",
+    "dvp",
+    "legacy",
+    "qwertz",
+    "ru_phonetic_dvorak",
+    "szl"
+  ],
+  "pt": [
+    "mac",
+    "mac_nodeadkeys",
+    "nativo",
+    "nativo-epo",
+    "nativo-us",
+    "nodeadkeys"
+  ],
+  "ro": [
+    "std",
+    "winkeys"
+  ],
+  "rs": [
+    "alternatequotes",
+    "latin",
+    "latinalternatequotes",
+    "latinunicode",
+    "latinunicodeyz",
+    "latinyz",
+    "rue",
+    "yz"
+  ],
+  "ru": [
+    "ab",
+    "bak",
+    "chm",
+    "cv",
+    "cv_latin",
+    "dos",
+    "kom",
+    "legacy",
+    "mac",
+    "os_legacy",
+    "os_winkeys",
+    "phonetic",
+    "phonetic_YAZHERTY",
+    "phonetic_azerty",
+    "phonetic_dvorak",
+    "phonetic_fr",
+    "phonetic_winkeys",
+    "ruchey_en",
+    "ruchey_ru",
+    "sah",
+    "srp",
+    "tt",
+    "typewriter",
+    "typewriter-legacy",
+    "udm",
+    "xal"
+  ],
+  "se": [
+    "dvorak",
+    "mac",
+    "nodeadkeys",
+    "rus",
+    "rus_nodeadkeys",
+    "smi",
+    "svdvorak",
+    "swl",
+    "us",
+    "us_dvorak"
+  ],
+  "si": [
+    "alternatequotes",
+    "us"
+  ],
+  "sk": [
+    "bksl",
+    "qwerty",
+    "qwerty_bksl"
+  ],
+  "sn": [
+    ""
+  ],
+  "sy": [
+    "ku",
+    "ku_alt",
+    "ku_f",
+    "syc",
+    "syc_phonetic"
+  ],
+  "tg": [
+    ""
+  ],
+  "th": [
+    "pat",
+    "tis"
+  ],
+  "tj": [
+    "legacy"
+  ],
+  "tm": [
+    "alt"
+  ],
+  "tr": [
+    "alt",
+    "e",
+    "f",
+    "intl",
+    "ku",
+    "ku_alt",
+    "ku_f",
+    "ot",
+    "otf",
+    "otk",
+    "otkf"
+  ],
+  "tw": [
+    "indigenous",
+    "saisiyat"
+  ],
+  "tz": [
+    ""
+  ],
+  "ua": [
+    "crh",
+    "crh_alt",
+    "crh_f",
+    "homophonic",
+    "legacy",
+    "macOS",
+    "phonetic",
+    "typewriter",
+    "winkeys"
+  ],
+  "us": [
+    "alt-intl",
+    "altgr-intl",
+    "chr",
+    "colemak",
+    "colemak_dh",
+    "colemak_dh_iso",
+    "colemak_dh_ortho",
+    "colemak_dh_wide",
+    "colemak_dh_wide_iso",
+    "dvorak",
+    "dvorak-alt-intl",
+    "dvorak-classic",
+    "dvorak-intl",
+    "dvorak-l",
+    "dvorak-mac",
+    "dvorak-r",
+    "dvp",
+    "euro",
+    "haw",
+    "hbs",
+    "intl",
+    "mac",
+    "norman",
+    "olpc2",
+    "rus",
+    "symbolic",
+    "workman",
+    "workman-intl"
+  ],
+  "uz": [
+    "latin"
+  ],
+  "vn": [
+    "fr",
+    "us"
+  ]
+}
