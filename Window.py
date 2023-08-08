@@ -1,21 +1,31 @@
-from PySide6.QtWidgets import QApplication, QLabel, QMainWindow, QListWidget, QStackedWidget, QVBoxLayout, QWidget, QHBoxLayout
+from PySide6.QtGui import QIcon
+from PySide6.QtWidgets import QApplication, QLabel, QListWidgetItem, QMainWindow, QListWidget, QStackedWidget, QVBoxLayout, QWidget, QHBoxLayout
 from PySide6.QtCore import Qt
 from src.pages.General import GeneralPage
 from src.pages.Appearance import AppearancePage
+
+generalIcon = QIcon("./src/assets/cog-outline.svg")
+appearanceIcon = QIcon("./src/assets/brush-outline.svg")
+inputIcon = QIcon("./src/assets/keypad-outline.svg")
+debugIcon = QIcon("./src/assets/bug-outline.svg")
+monitorIcon = QIcon("./src/assets/desktop-outline.svg")
+
+
 
 class MainWindow(QMainWindow):
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
 
         self.sidebar = QListWidget()
-        self.OPTIONS = ["General", "Appearance", "Animations", "Input", "Misc", "Binds", "Debug", "Monitor"]
-        self.sidebar.addItems(self.OPTIONS)
+        self.OPTIONS = [("General", generalIcon), ("Appearance", appearanceIcon), ("Input", inputIcon) , ("Debug", debugIcon), ("Monitor", monitorIcon)]
+        for OPTION, icon in self.OPTIONS:
+            items = QListWidgetItem(icon, OPTION)
+            self.sidebar.addItem(items)
         self.sidebar.setFixedWidth(self.width() // 4)
         self.sidebar.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
 
         self.mainArea = QStackedWidget()
-
-        for option in self.OPTIONS:
+        for option, _ in self.OPTIONS:
             if option == "General":
                 page = GeneralPage()
             elif option == "Appearance":
@@ -26,7 +36,6 @@ class MainWindow(QMainWindow):
                 page.setLayout(layout)
             self.mainArea.addWidget(page)
         self.sidebar.currentRowChanged.connect(self.mainArea.setCurrentIndex)
-
         self.hLayout = QHBoxLayout()
         self.hLayout.addWidget(self.sidebar)
         self.hLayout.addWidget(self.mainArea)
