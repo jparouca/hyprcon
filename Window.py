@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QApplication, QMainWindow, QListWidget, QStackedWidget, QVBoxLayout, QWidget, QHBoxLayout
+from PySide6.QtWidgets import QApplication, QLabel, QMainWindow, QListWidget, QStackedWidget, QVBoxLayout, QWidget, QHBoxLayout
 from PySide6.QtCore import Qt
 from src.pages.General import GeneralPage
 from src.pages.Appearance import AppearancePage
@@ -12,34 +12,6 @@ class MainWindow(QMainWindow):
         self.sidebar.addItems(self.OPTIONS)
         self.sidebar.setFixedWidth(self.width() // 4)
         self.sidebar.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
-        self.sidebar.setStyleSheet("""
-            QListWidget {
-                color: black;
-                padding: 10px;
-                font-size: 16px;
-                outline: 0px;
-                text-align: center;
-            }
-
-            QListWidget::item {
-                min-height: 36px;
-                padding: 6px;
-                margin: 4px 2px;
-                border-radius: 4px;
-                border: none;
-            }
-
-            QListWidget::item:hover {
-                background-color: #D5D9EB;
-                border: none;
-
-            }
-            QListWidget::item:selected {
-                border: none;
-                background-color: #B3B8DB;
-                color: black;
-            }
-        """)
 
         self.mainArea = QStackedWidget()
 
@@ -67,7 +39,7 @@ app = QApplication([])
 app.setStyleSheet("""
                   * {
                       background: #fff;
-
+                    
                       font-family: "Segoe UI", sans-serif;
                       }
 
@@ -78,8 +50,35 @@ app.setStyleSheet("""
                   QListWidget {
                       border: none;
                       font-weight: semi-bold;
+                      color: black;
+                      padding: 10px;
+                      font-size: 16px;
+                      outline: 0px;
+                      text-align: center;
+
+                      }
+                  QListWidget::item {
+                      min-height: 36px;
+                      padding: 6px;
+                      margin: 4px 2px;
+                      border-radius: 4px;
+                      font-size: 14px;
+                      border: none;
                       }
 
+                  QListWidget::item:hover {
+                      background-color: #D5D9EB;
+                      border: none;
+                      font-size: 15px;
+
+                }
+                  QListWidget::item:selected {
+                      border: none;
+                      background-color: #B3B8DB;
+                      color: black;
+                      font-size: 16px;
+
+                      }
                   QStackedWidget {
                       border-left: 1px solid #E9D7FE;
                       border-top: 1px solid #E9D7FE;
@@ -114,7 +113,7 @@ app.setStyleSheet("""
                       height: 100px;
                       margin: -24px -12px;
                       }
-                      """)
+                  """)
 window = MainWindow()
 window.show()
 app.exec_()
