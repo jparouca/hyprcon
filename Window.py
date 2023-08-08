@@ -30,13 +30,13 @@ class MainWindow(QMainWindow):
             }
 
             QListWidget::item:hover {
-                background-color: rgba(236, 236, 236, 255);
+                background-color: #D5D9EB;
                 border: none;
 
             }
             QListWidget::item:selected {
                 border: none;
-                background-color: rgba(225, 225, 225, 255);
+                background-color: #B3B8DB;
                 color: black;
             }
         """)
@@ -87,17 +87,19 @@ app.setStyleSheet("""
                       }
                   QSlide {
                       height: 100px;
+                      border-radius: 18px;
 
                       }
                   QSlider::groove {
                       border: 1px solid #999;
                       height: 6px;
                       background: #999999;
+                        border-radius: 18px;
                       margin: 0 12px;
                       }
 
                   QSlider::sub-page {
-                      background: #9E77ED;
+                      background: #717BBC;
                       }
 
                   QSlider::add-page {
@@ -107,7 +109,7 @@ app.setStyleSheet("""
                   QSlider::handle:horizontal {
                       background-color: #fff;
                       border-radius: 999px;
-                      border: 2px solid #D6BBFB;
+                      border: 2px solid #717BBC;
                       width: 15px;
                       height: 100px;
                       margin: -24px -12px;
