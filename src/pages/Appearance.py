@@ -1,5 +1,5 @@
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QApplication, QCheckBox, QColorDialog, QDoubleSpinBox,  QLineEdit, QMainWindow, QSizePolicy, QSlider, QSpacerItem, QSpinBox, QVBoxLayout, QGroupBox, QLabel,  QWidget
+from PySide6.QtWidgets import QApplication, QCheckBox, QColorDialog, QDoubleSpinBox, QHBoxLayout,  QLineEdit, QMainWindow, QSizePolicy, QSlider, QSpacerItem, QSpinBox, QVBoxLayout, QGroupBox, QLabel,  QWidget
 from ..backend.hyprctl import HyprctlWrapper
 
 
@@ -15,12 +15,13 @@ class AppearancePage(QMainWindow):
         self.setCentralWidget(mainWidget)
 
         pageTitle = QLabel("Appearance")
-        pageTitle.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        pageTitle.setAlignment(Qt.AlignmentFlag.AlignLeft)
         pageTitle.setStyleSheet("font-size: 20px; color: #344054; font-weight: semi-bold; margin-bottom: 20px;")
 
         self.mainLayout.addWidget(pageTitle)
         self.mainLayout.addWidget(self.antialiasingAndOpacityGroup())
         self.mainLayout.addWidget(self.shadowGroup())
+        self.mainLayout.addWidget(self.dimGroup())
 
         self.mainLayout.addItem(QSpacerItem(0, 0, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding))
 
@@ -52,12 +53,18 @@ class AppearancePage(QMainWindow):
         group = QGroupBox("Shadows")
         layout = QVBoxLayout()
 
-        # drop shadow
-
+        # drop shadow and shadow ignore window
+        hLayout = QHBoxLayout()
         dropShadowCheckBox = QCheckBox("Enable drop shadow")
         dropShadowCheckBox.setChecked(bool(self.hyprctl.get_option(SECTION, "drop_shadow", 'int')))
         dropShadowCheckBox.stateChanged.connect((lambda state: self.hyprctl.set_option(SECTION, 'drop_shadow', 'true' if state == 2 else 'false')))
-        layout.addWidget(dropShadowCheckBox)
+        hLayout.addWidget(dropShadowCheckBox)
+
+        shadowIgnoreCheckBox = QCheckBox("window ignore (if true the shadow will not be rendered behind the window, only around it)")
+        shadowIgnoreCheckBox.setChecked(bool(self.hyprctl.get_option(SECTION, 'shadow_ignore_window', 'int')))
+        shadowIgnoreCheckBox.stateChanged.connect(lambda state: self.hyprctl.set_option(SECTION, 'shadow_ignore_window', 'true' if state == 2 else 'false'))
+        hLayout.addWidget(shadowIgnoreCheckBox)
+        layout.addLayout(hLayout)
 
         # shadow range in pixels (add a interval for ticket)
         shadowRangeLabel = QLabel("Shadow range (in px)")
@@ -78,10 +85,6 @@ class AppearancePage(QMainWindow):
         layout.addWidget(shadowRenderPowerSpinBox)
 
         # shadow ignore window
-        shadowIgnoreCheckBox = QCheckBox("If true the shadow will not be rendered behind the window, only around it")
-        shadowIgnoreCheckBox.setChecked(bool(self.hyprctl.get_option(SECTION, 'shadow_ignore_window', 'int')))
-        shadowIgnoreCheckBox.stateChanged.connect(lambda state: self.hyprctl.set_option(SECTION, 'shadow_ignore_window', 'true' if state == 2 else 'false'))
-        layout.addWidget(shadowIgnoreCheckBox)
 
         # shadow scale
         shadowScaleLabel = QLabel("Shadow scale (1.0 = 100%)")
@@ -97,6 +100,54 @@ class AppearancePage(QMainWindow):
 
         return group
 
+
+    def dimGroup(self):
+        group = QGroupBox("Dim")
+        layout = QVBoxLayout()
+        group.setLayout(layout)
+
+
+        hLayout = QHBoxLayout()
+        # Dim Inactive
+        dimInactiveCheckBox = QCheckBox("Dim inactive windows")
+        dimInactiveCheckBox.setChecked(bool(self.hyprctl.get_option(SECTION, 'dim_inactive', 'int')))
+        dimInactiveCheckBox.stateChanged.connect(lambda state: self.hyprctl.set_option(SECTION, 'dim_inactive', 'true' if state == 2 else 'false'))
+        hLayout.addWidget(dimInactiveCheckBox)
+
+        vLayout = QVBoxLayout()
+        # Dim Strength
+        dimStrengthLabel = QLabel("Dim strength (0.0 - 1.0)")
+        dimStrengthSpin = QDoubleSpinBox()
+        dimStrengthSpin.setRange(0.0, 1.0)
+        dimStrengthSpin.setSingleStep(0.1)
+        dimStrengthSpin.setValue(float(self.hyprctl.get_option(SECTION, 'dim_strength', 'float')))
+        dimStrengthSpin.valueChanged.connect(lambda state: self.hyprctl.set_option(SECTION, 'dim_strength', 'true' if state == 2 else 'false'))
+        vLayout.addWidget(dimStrengthLabel)
+        vLayout.addWidget(dimStrengthSpin)
+        
+        hLayout.addLayout(vLayout)
+        layout.addLayout(hLayout)
+
+        # Dim Special
+        dimSpecialLabel = QLabel("Dim special - how much to dim the rest of the screen by when a special workspace is open.")
+        dimSpecialSlider = QSlider(Qt.Orientation.Horizontal)
+        dimSpecialSlider.setRange(0, 100)
+        dimSpecialSlider.setValue(int(self.hyprctl.get_option(SECTION, 'dim_secial', 'int')) * 100)
+        dimSpecialSlider.valueChanged.connect(lambda value: self.hyprctl.set_option(SECTION, 'dim_special', value / 100))
+        layout.addWidget(dimSpecialLabel)
+        layout.addWidget(dimSpecialSlider)
+
+        # Dim Around
+        dimAroundLabel = QLabel("Dim around - how much the dimaround window rule should dim by")
+        dimAroundSlider = QSlider(Qt.Orientation.Horizontal)
+        dimAroundSlider.setRange(0, 100)
+        dimAroundSlider.setValue(int(float(self.hyprctl.get_option(SECTION, 'dim_around', 'float')) * 100))
+        dimAroundSlider.valueChanged.connect(lambda value: self.hyprctl.set_option(SECTION, 'dim_around', value / 100))
+        layout.addWidget(dimAroundLabel)
+        layout.addWidget(dimAroundSlider)
+
+
+        return group
 
 
 

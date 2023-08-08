@@ -18,7 +18,7 @@ class GeneralPage(QMainWindow):
 
         # Title
         pageTitle = QLabel("General")
-        pageTitle.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        pageTitle.setAlignment(Qt.AlignmentFlag.AlignLeft)
         pageTitle.setStyleSheet("font-size: 20px; font-weight: semi-bold; margin-bottom: 20px;")
         
 
