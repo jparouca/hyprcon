@@ -1,6 +1,7 @@
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QApplication, QCheckBox, QColorDialog, QDoubleSpinBox, QHBoxLayout,  QLineEdit, QMainWindow, QSizePolicy, QSlider, QSpacerItem, QSpinBox, QVBoxLayout, QGroupBox, QLabel,  QWidget
+from PySide6.QtWidgets import QApplication, QDoubleSpinBox, QHBoxLayout, QMainWindow, QSizePolicy, QSlider, QSpacerItem, QSpinBox, QVBoxLayout, QGroupBox, QLabel,  QWidget
 from ..backend.hyprctl import HyprctlWrapper
+from ..components.CToggleLabel import CToggleLabel
 
 
 SECTION = "decoration"
@@ -30,9 +31,7 @@ class AppearancePage(QMainWindow):
         layout = QVBoxLayout()
 
         # multisample_edges
-        multisampleEdgesCheckbox = QCheckBox("Enable antialiasing (no-jaggies) for rounded corners")
-        multisampleEdgesCheckbox.setChecked(bool(self.hyprctl.get_option(SECTION, "multisample_edges", 'int')))
-        multisampleEdgesCheckbox.stateChanged.connect(lambda state: self.hyprctl.set_option(SECTION, "multisample_edges", state == Qt.CheckState.Checked))
+        multisampleEdgesCheckbox = CToggleLabel("Enable antialiasing (no-jaggies) for rounded corners", SECTION, 'multisample_edges', 'int')
         layout.addWidget(multisampleEdgesCheckbox)
 
         # active_opacity, inactive_opacity, fullscreen_opacity
@@ -55,14 +54,10 @@ class AppearancePage(QMainWindow):
 
         # drop shadow and shadow ignore window
         hLayout = QHBoxLayout()
-        dropShadowCheckBox = QCheckBox("Enable drop shadow")
-        dropShadowCheckBox.setChecked(bool(self.hyprctl.get_option(SECTION, "drop_shadow", 'int')))
-        dropShadowCheckBox.stateChanged.connect((lambda state: self.hyprctl.set_option(SECTION, 'drop_shadow', 'true' if state == 2 else 'false')))
+        dropShadowCheckBox = CToggleLabel("Enable drop shadow", SECTION, 'drop_shadow', 'int')
         hLayout.addWidget(dropShadowCheckBox)
 
-        shadowIgnoreCheckBox = QCheckBox("window ignore (if true the shadow will not be rendered behind the window, only around it)")
-        shadowIgnoreCheckBox.setChecked(bool(self.hyprctl.get_option(SECTION, 'shadow_ignore_window', 'int')))
-        shadowIgnoreCheckBox.stateChanged.connect(lambda state: self.hyprctl.set_option(SECTION, 'shadow_ignore_window', 'true' if state == 2 else 'false'))
+        shadowIgnoreCheckBox = CToggleLabel("window ignore (if true the shadow will not be rendered behind the window, only around it)", SECTION, 'shadow_ignore_window', 'int')
         hLayout.addWidget(shadowIgnoreCheckBox)
         layout.addLayout(hLayout)
 
@@ -109,9 +104,7 @@ class AppearancePage(QMainWindow):
 
         hLayout = QHBoxLayout()
         # Dim Inactive
-        dimInactiveCheckBox = QCheckBox("Dim inactive windows")
-        dimInactiveCheckBox.setChecked(bool(self.hyprctl.get_option(SECTION, 'dim_inactive', 'int')))
-        dimInactiveCheckBox.stateChanged.connect(lambda state: self.hyprctl.set_option(SECTION, 'dim_inactive', 'true' if state == 2 else 'false'))
+        dimInactiveCheckBox = CToggleLabel("Dim inactive windows", SECTION, 'dim_inactive', 'int')
         hLayout.addWidget(dimInactiveCheckBox)
 
         vLayout = QVBoxLayout()

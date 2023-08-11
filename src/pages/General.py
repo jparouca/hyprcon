@@ -1,8 +1,9 @@
-from PySide6.QtWidgets import (QApplication, QCheckBox, QDoubleSpinBox,  QGroupBox, QMainWindow, QVBoxLayout, QHBoxLayout,
+from PySide6.QtWidgets import (QApplication, QDoubleSpinBox,  QGroupBox, QMainWindow, QVBoxLayout, QHBoxLayout,
                                QWidget, QLabel, QSlider, QComboBox, QSpacerItem, QSizePolicy)
 from PySide6.QtCore import Qt
 import sys
 from ..backend.hyprctl import HyprctlWrapper
+from ..components.CToggleLabel import CToggleLabel
 
 
 SECTION = "general"
@@ -44,17 +45,16 @@ class GeneralPage(QMainWindow):
         layout.addWidget(sensSpinBox)
 
         # Apply Sensitivity to Raw Mouse Output
-        applySensToRawCheckbox = QCheckBox("Apply sensitivity to raw mouse output (not recommended)")
-        applySensToRawCheckbox.setChecked(bool(self.hyprctl.get_option(SECTION, "apply_sens_to_raw", 'int')))
-        applySensToRawCheckbox.stateChanged.connect(lambda state: self.hyprctl.set_option(SECTION, "apply_sens_to_raw", self.onCheckBoxChange(state)))
+        applySensToRawCheckbox = CToggleLabel("Apply sensitivity to raw mouse output (not recommended)",
+                                              SECTION,
+                                              'appy_sens_to_raw',
+                                              'int',
+                                              "if on, will also apply the sensitivity to raw mouse output (e.g. sensitivity in games)")
 
         layout.addWidget(applySensToRawCheckbox)
 
         # Resize on Border
-        resizeOnBorderCheckbox = QCheckBox("Enable resizing windows by clicking and dragging on borders and gaps")
-        resizeOnBorderCheckbox.setChecked(bool(self.hyprctl.get_option(SECTION, "resize_on_border", 'int')))
-        resizeOnBorderCheckbox.stateChanged.connect(lambda state: self.hyprctl.set_option(SECTION, "resize_on_border", "true" if state == 2 else "false"))
-
+        resizeOnBorderCheckbox = CToggleLabel("Enable resizing windows by clicking and dragging on borders and gaps", SECTION, 'resize_on_border', 'int')
         layout.addWidget(resizeOnBorderCheckbox)
 
         # Extend Border Grab Area
@@ -68,10 +68,7 @@ class GeneralPage(QMainWindow):
         layout.addWidget(extendBorderGrabAreaSlider)
 
         # Hover Icon on Border
-        hoverIconOnBorderCheckbox = QCheckBox("Show cursor icon when hovering over borders (only when resizing on border is on)")
-        hoverIconOnBorderCheckbox.setChecked(bool(self.hyprctl.get_option(SECTION, "hover_icon_on_border", 'int')))
-        hoverIconOnBorderCheckbox.stateChanged.connect(lambda state: self.hyprctl.set_option(SECTION, "hover_icon_on_border", "true" if state == 2 else "false"))
-
+        hoverIconOnBorderCheckbox = CToggleLabel("Show cursor icon when hovering over borders (only when resizing on border is on)", SECTION, 'hover_icon_border', 'int')
         layout.addWidget(hoverIconOnBorderCheckbox)
 
         group.setLayout(layout)
@@ -84,15 +81,11 @@ class GeneralPage(QMainWindow):
         layout = QVBoxLayout()
 
         # Option: No Focus fallback
-        focusFollowsMouseCheckbox = QCheckBox("focus fallback")
-        focusFollowsMouseCheckbox.setChecked(bool(self.hyprctl.get_option(SECTION, "no_focus_fallback", 'int')))
-        focusFollowsMouseCheckbox.stateChanged.connect(lambda state: self.hyprctl.set_option(SECTION, "no_focus_fallback", "true" if state == 2 else "false"))
+        focusFollowsMouseCheckbox = CToggleLabel("focus fallback", SECTION, 'no_focus_fallback', 'int')
         layout.addWidget(focusFollowsMouseCheckbox)
 
         # Option: no cursor warps
-        autoTilingLayoutCheckbox = QCheckBox("cursor warps")
-        autoTilingLayoutCheckbox.setChecked(bool(self.hyprctl.get_option(SECTION, "no_cursor_warps", 'int')))
-        autoTilingLayoutCheckbox.stateChanged.connect(lambda state: self.hyprctl.set_option(SECTION, "no_cursor_warps", "true" if state == 2 else "false"))
+        autoTilingLayoutCheckbox = CToggleLabel("cursor warps", SECTION, 'no_cursor_warps', 'int')
         layout.addWidget(autoTilingLayoutCheckbox)
 
         # Option: Default Window Layout
@@ -115,11 +108,6 @@ class GeneralPage(QMainWindow):
         print(self.hyprctl.get_option(SECTION, option, 'int'))
         sliderValue.setText(str(value))
         self.hyprctl.set_option(SECTION, option, value)
-
-
-    def onCheckBoxChange(self, state):
-        if state is not None:
-            self.hyprctl.set_option(SECTION, "apply_sens_to_raw", "true" if state == 2 else "false")
 
 
 

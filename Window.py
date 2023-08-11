@@ -125,6 +125,7 @@ app.setStyleSheet("""
                       height: 100px;
                       margin: -24px -12px;
                       }
+
                   """)
 window = MainWindow()
 window.show()
