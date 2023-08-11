@@ -52,14 +52,18 @@ class AppearancePage(QMainWindow):
         group = QGroupBox("Shadows")
         layout = QVBoxLayout()
 
-        # drop shadow and shadow ignore window
-        hLayout = QHBoxLayout()
+        # drop shadow
         dropShadowCheckBox = CToggleLabel("Enable drop shadow", SECTION, 'drop_shadow', 'int')
-        hLayout.addWidget(dropShadowCheckBox)
+        layout.addWidget(dropShadowCheckBox)
 
-        shadowIgnoreCheckBox = CToggleLabel("window ignore (if true the shadow will not be rendered behind the window, only around it)", SECTION, 'shadow_ignore_window', 'int')
-        hLayout.addWidget(shadowIgnoreCheckBox)
-        layout.addLayout(hLayout)
+        # window ignore
+        shadowIgnoreCheckBox = CToggleLabel("Window ignore",
+                                            SECTION,
+                                            'shadow_ignore_window',
+                                            'int',
+                                            "(if true the shadow will not be rendered behind the window, only around it)")
+
+        layout.addWidget(shadowIgnoreCheckBox)
 
         # shadow range in pixels (add a interval for ticket)
         shadowRangeLabel = QLabel("Shadow range (in px)")

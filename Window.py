@@ -1,6 +1,7 @@
+import subprocess
 from PySide6.QtGui import QIcon
 from PySide6.QtWidgets import QApplication, QLabel, QListWidgetItem, QMainWindow, QListWidget, QStackedWidget, QVBoxLayout, QWidget, QHBoxLayout
-from PySide6.QtCore import Qt
+from PySide6.QtCore import QTimer, Qt
 from src.pages.General import GeneralPage
 from src.pages.Appearance import AppearancePage
 from src.pages.Input import InputPage
@@ -17,6 +18,9 @@ class MainWindow(QMainWindow):
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
 
+
+
+        self.setWindowTitle("hyprcon")
         self.sidebar = QListWidget()
         self.OPTIONS = [("General", generalIcon), ("Appearance", appearanceIcon), ("Input", inputIcon) , ("Debug", debugIcon), ("Monitor", monitorIcon)]
         for OPTION, icon in self.OPTIONS:
@@ -47,22 +51,32 @@ class MainWindow(QMainWindow):
         centralWidget.setLayout(self.hLayout)
         self.setCentralWidget(centralWidget)
 
+    def showEvent(self, event):
+        super().showEvent(event)
+
+        def toggleFloating():
+            subprocess.run(["hyprctl", "dispatch", "togglefloating", "python3"])
+            subprocess.run(["hyprctl", "dispatch", "centerwindow"])
+            print("floating")
+        QTimer.singleShot(500, toggleFloating)
+
+
 app = QApplication([])
 app.setStyleSheet("""
                   * {
-                      background: #fff;
-                    
+                      background: #1A1A2E;
                       font-family: "Segoe UI", sans-serif;
+                      color: #CFE8F6;
                       }
 
                   QGroupBox {
-                      font-size: 14px;
-                      font-weight: semi-bold;
+                      font-size: 16px;
+                      font-weight: bold;
+                      font-weight: 600;
                       }
                   QListWidget {
                       border: none;
                       font-weight: semi-bold;
-                      color: black;
                       padding: 10px;
                       font-size: 16px;
                       outline: 0px;
@@ -79,14 +93,14 @@ app.setStyleSheet("""
                       }
 
                   QListWidget::item:hover {
-                      background-color: #D5D9EB;
+                      background-color: #A6DADF;
                       border: none;
                       font-size: 15px;
 
                 }
                   QListWidget::item:selected {
                       border: none;
-                      background-color: #B3B8DB;
+                      background-color: #7FFFD4;
                       color: black;
                       font-size: 16px;
 
@@ -110,7 +124,7 @@ app.setStyleSheet("""
                       }
 
                   QSlider::sub-page {
-                      background: #717BBC;
+                      background: #7FFFD4;
                       }
 
                   QSlider::add-page {
@@ -125,6 +139,9 @@ app.setStyleSheet("""
                       height: 100px;
                       margin: -24px -12px;
                       }
+                  QCheckBox {
+                          border: 1px solid #1A1A2E;
+                          }
 
                   """)
 window = MainWindow()

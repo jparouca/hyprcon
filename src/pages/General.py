@@ -33,16 +33,35 @@ class GeneralPage(QMainWindow):
     def mouseInteractionGroup(self):
         group = QGroupBox("Mouse Interaction and Sensitivity")
         layout = QVBoxLayout()
-
+    
+        
         # Sensitivity Option
+        sensHLayout = QHBoxLayout()
+        sensVLayout = QVBoxLayout()
+
         sensLabel = QLabel("Sensitivity (1.0 is recommended, legacy)")
+        sensLabelFont = sensLabel.font()
+        sensLabelFont.setPointSize(12)
+        sensLabel.setFont(sensLabelFont)
+
+        sensDescr = QLabel("mouse sensitivity (legacy, may cause bugs if not 1, prefer input:sensitivity)")
+        sensDescrFont = sensDescr.font()
+        sensLabelFont.setPointSize(9)
+        sensDescr.setFont(sensDescrFont)
+        sensVLayout.addWidget(sensLabel)
+        sensVLayout.addWidget(sensDescr)
+        
         sensSpinBox = QDoubleSpinBox()
         sensSpinBox.setRange(1.0, 0)
         sensSpinBox.setSingleStep(0.1)
         sensSpinBox.setValue(self.hyprctl.get_option(SECTION, "sensitivity", 'int'))
         sensSpinBox.valueChanged.connect(lambda value: self.hyprctl.set_option(SECTION, "sensitivity", value))
-        layout.addWidget(sensLabel)
-        layout.addWidget(sensSpinBox)
+
+        sensHLayout.addLayout(sensVLayout)
+        sensHLayout.addStretch(1)
+        sensHLayout.addWidget(sensSpinBox)
+
+        layout.addLayout(sensHLayout)
 
         # Apply Sensitivity to Raw Mouse Output
         applySensToRawCheckbox = CToggleLabel("Apply sensitivity to raw mouse output (not recommended)",
@@ -54,7 +73,11 @@ class GeneralPage(QMainWindow):
         layout.addWidget(applySensToRawCheckbox)
 
         # Resize on Border
-        resizeOnBorderCheckbox = CToggleLabel("Enable resizing windows by clicking and dragging on borders and gaps", SECTION, 'resize_on_border', 'int')
+        resizeOnBorderCheckbox = CToggleLabel("Resize on border",
+                                              SECTION,
+                                              'resize_on_border',
+                                              'int',
+                                              "enables resizing windows by clicking and dragging on borders and gaps")
         layout.addWidget(resizeOnBorderCheckbox)
 
         # Extend Border Grab Area
@@ -68,7 +91,11 @@ class GeneralPage(QMainWindow):
         layout.addWidget(extendBorderGrabAreaSlider)
 
         # Hover Icon on Border
-        hoverIconOnBorderCheckbox = CToggleLabel("Show cursor icon when hovering over borders (only when resizing on border is on)", SECTION, 'hover_icon_border', 'int')
+        hoverIconOnBorderCheckbox = CToggleLabel("Hover icon on border",
+                                                 SECTION,
+                                                 'hover_icon_border',
+                                                 'int',
+                                                 "show a cursor icon when hovering over borders, only used when general:resize_on_border is on.")
         layout.addWidget(hoverIconOnBorderCheckbox)
 
         group.setLayout(layout)

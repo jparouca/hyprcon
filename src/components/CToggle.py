@@ -11,9 +11,9 @@ class CToggle(QCheckBox):
     def __init__(
         self,
         width = 50,
-        bg_color = "#777", 
-        circle_color = "#DDD",
-        active_color = "#00BCFF",
+        bg_color = "#8A8A8A",
+        circle_color = "#fff",
+        active_color = "#7FFFD4",
         animation_curve = QEasingCurve.Type.OutBounce
     ):
         QCheckBox.__init__(self)
