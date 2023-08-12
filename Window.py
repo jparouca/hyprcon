@@ -1,6 +1,6 @@
 import subprocess
 from PySide6.QtGui import QIcon
-from PySide6.QtWidgets import QApplication, QLabel, QListWidgetItem, QMainWindow, QListWidget, QStackedWidget, QVBoxLayout, QWidget, QHBoxLayout
+from PySide6.QtWidgets import QApplication, QLabel, QListWidgetItem, QMainWindow, QListWidget, QScrollArea, QSizePolicy, QStackedWidget, QVBoxLayout, QWidget, QHBoxLayout
 from PySide6.QtCore import QTimer, Qt
 from src.pages.General import GeneralPage
 from src.pages.Appearance import AppearancePage
@@ -18,6 +18,7 @@ class MainWindow(QMainWindow):
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
 
+        self.setFixedSize(1200, 900)
 
 
         self.setWindowTitle("hyprcon")
@@ -26,8 +27,7 @@ class MainWindow(QMainWindow):
         for OPTION, icon in self.OPTIONS:
             items = QListWidgetItem(icon, OPTION)
             self.sidebar.addItem(items)
-        self.sidebar.setFixedWidth(self.width() // 4)
-        self.sidebar.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+        self.sidebar.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
 
         self.mainArea = QStackedWidget()
         for option, _ in self.OPTIONS:
@@ -43,9 +43,20 @@ class MainWindow(QMainWindow):
                 page.setLayout(layout)
             self.mainArea.addWidget(page)
         self.sidebar.currentRowChanged.connect(self.mainArea.setCurrentIndex)
+
+
+        scrollArea = QScrollArea()
+        scrollArea.setWidget(self.mainArea)
+        scrollArea.setWidgetResizable(True)
+        scrollArea.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+
         self.hLayout = QHBoxLayout()
-        self.hLayout.addWidget(self.sidebar)
-        self.hLayout.addWidget(self.mainArea)
+        self.hLayout.addWidget(self.sidebar, 1)
+        self.hLayout.addWidget(scrollArea, 7)
+
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding)
+        self.mainArea.setSizePolicy(sizePolicy)
+
 
         centralWidget = QWidget()
         centralWidget.setLayout(self.hLayout)
@@ -96,6 +107,7 @@ app.setStyleSheet("""
                       background-color: #A6DADF;
                       border: none;
                       font-size: 15px;
+                      color: #000;
 
                 }
                   QListWidget::item:selected {
@@ -106,22 +118,28 @@ app.setStyleSheet("""
 
                       }
                   QStackedWidget {
-                      border-left: 1px solid #B3B8DB;
                       border-top: 1px solid #B3B8DB;
                       border-top-left-radius: 10px;
                       }
-                  QSlide {
-                      height: 100px;
-                      border-radius: 18px;
+                  QSlider::groove:horizontal {
+                          border-radius: 5px;
+                          height: 10px;
+                          margin: 0px;
+                          background-color: #1A1A2e;
+                          }
+                  QSlider::groove:horizontal:hover {
+                          }
 
-                      }
-                  QSlider::groove {
-                      border: 1px solid #999;
-                      height: 6px;
-                      background: #999999;
-                        border-radius: 18px;
-                      margin: 0 12px;
-                      }
+                    QSlider:handle:horizontal {
+                            background-color: #fff;
+                            border: none;
+                            height: 15px;
+                            width: 15px;
+                            margin: 0px;
+                            border-radius: 5px;
+                            }
+                    QSlider:handle:horizontal:hover {
+                            }
 
                   QSlider::sub-page {
                       background: #7FFFD4;
@@ -131,14 +149,6 @@ app.setStyleSheet("""
                       background: #999999;
                       }
 
-                  QSlider::handle:horizontal {
-                      background-color: #fff;
-                      border-radius: 999px;
-                      border: 2px solid #717BBC;
-                      width: 15px;
-                      height: 100px;
-                      margin: -24px -12px;
-                      }
                   QCheckBox {
                           border: 1px solid #1A1A2E;
                           }

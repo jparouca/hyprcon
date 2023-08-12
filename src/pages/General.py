@@ -4,6 +4,7 @@ from PySide6.QtCore import Qt
 import sys
 from ..backend.hyprctl import HyprctlWrapper
 from ..components.CToggleLabel import CToggleLabel
+from ..components.CSlider import CSlider
 
 
 SECTION = "general"
@@ -82,7 +83,7 @@ class GeneralPage(QMainWindow):
 
         # Extend Border Grab Area
         extendBorderGrabAreaLabel = QLabel("Extend border grab area (only when resizing on border is on)")
-        extendBorderGrabAreaSlider = QSlider(Qt.Orientation.Horizontal)
+        extendBorderGrabAreaSlider = CSlider()
         extendBorderGrabAreaSlider.setRange(0, 50)
         extendBorderGrabAreaSlider.setValue(bool(self.hyprctl.get_option(SECTION, "extend_border_grab_area", 'int')))
         extendBorderGrabAreaSlider.valueChanged.connect(lambda value: self.hyprctl.set_option(SECTION, "extend_border_grab_area", value))

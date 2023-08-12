@@ -2,6 +2,8 @@ from PySide6.QtCore import Qt
 from PySide6.QtWidgets import QApplication, QDoubleSpinBox, QHBoxLayout, QMainWindow, QSizePolicy, QSlider, QSpacerItem, QSpinBox, QVBoxLayout, QGroupBox, QLabel,  QWidget
 from ..backend.hyprctl import HyprctlWrapper
 from ..components.CToggleLabel import CToggleLabel
+from ..components.CSlider import CSlider
+from ..components.CSpinBoxLabel import CSpinBoxLabel
 
 
 SECTION = "decoration"
@@ -17,14 +19,54 @@ class AppearancePage(QMainWindow):
 
         pageTitle = QLabel("Appearance")
         pageTitle.setAlignment(Qt.AlignmentFlag.AlignLeft)
-        pageTitle.setStyleSheet("font-size: 20px; color: #344054; font-weight: semi-bold; margin-bottom: 20px;")
 
         self.mainLayout.addWidget(pageTitle)
+        self.mainLayout.addWidget(self.appearanceGroup())
         self.mainLayout.addWidget(self.antialiasingAndOpacityGroup())
         self.mainLayout.addWidget(self.shadowGroup())
         self.mainLayout.addWidget(self.dimGroup())
+        self.mainLayout.addWidget(self.blurGroup())
 
         self.mainLayout.addItem(QSpacerItem(0, 0, QSizePolicy.Policy.Minimum, QSizePolicy.Policy.Expanding))
+
+
+    def appearanceGroup(self):
+        group = QGroupBox("Appearance")
+        layout = QVBoxLayout()
+
+        # border size
+        borderSizeBox = CSpinBoxLabel("Border size",
+                                      SECTION,
+                                      'border_size',
+                                      "size of the border around windows"
+                                      )
+        layout.addWidget(borderSizeBox)
+
+
+
+        
+
+        # gaps in
+
+        # gaps out
+
+        # inactive border color
+
+        # active border color
+
+        # group border color
+        
+        # group border actie color
+
+        # locked group border color
+
+        #locked group border inactive color
+
+        # curosr inactive timeout
+
+
+        return group
+
 
     def antialiasingAndOpacityGroup(self):
         group = QGroupBox("Antialiasing and Opacity")
@@ -97,6 +139,71 @@ class AppearancePage(QMainWindow):
 
         group.setLayout(layout)
 
+        return group
+
+    
+    def blurGroup(self):
+        group = QGroupBox("Blur")
+        layout = QVBoxLayout()
+        group.setLayout(layout)
+
+        # Enable kawase blur
+        kawaseBlur = CToggleLabel("Enable Kawase blur",
+                                  SECTION,
+                                  'blur:enabled',
+                                  'int',
+                                  "enable kawase window background blur")
+        layout.addWidget(kawaseBlur)
+
+        # blur size
+        bhLayout = QHBoxLayout()
+        blurSizeLabel = QLabel("Blur size (distance)")
+        blurSizeSlider = CSlider()
+        blurSizeSlider.setRange(0, 16)
+        blurSizeSlider.setValue(int(self.hyprctl.get_option(SECTION, 'blur:size', 'int')))
+        blurSizeSlider.valueChanged.connect(lambda value: self.hyprctl.set_option(SECTION, 'blur:size', value))
+
+        bhLayout.addWidget(blurSizeLabel)
+        bhLayout.addWidget(blurSizeSlider)
+        layout.addLayout(bhLayout)
+
+        # passes
+        bhpLayout = QHBoxLayout()
+        blurPassesLabel = QLabel("Blur passes amount")
+        blurPassesSlider = QSlider(Qt.Orientation.Horizontal)
+        blurPassesSlider.setRange(0, 3)
+        blurPassesSlider.setValue(int(self.hyprctl.get_option(SECTION, 'blur:passes', 'int')))
+        blurPassesSlider.valueChanged.connect(lambda value: self.hyprctl.set_option(SECTION, 'blur:passes', value))
+
+        bhpLayout.addWidget(blurPassesLabel)
+        bhpLayout.addWidget(blurPassesSlider)
+        
+        layout.addLayout(bhpLayout)
+
+        # ignore opacity
+        ignoreOpacity = CToggleLabel("Ignore opacity",
+                                     SECTION,
+                                     'blur:ignore_opacity',
+                                     'int',
+                                     "make the blur layer ignore the opacity of the window")
+        layout.addWidget(ignoreOpacity)
+
+        # new optimizations
+        newOpt = CToggleLabel("New optimizations",
+                              SECTION,
+                              'blur:new_optimizations',
+                              'int',
+                              "whether to enable further optimizations to the blur. Recommended to leave on, as it will massively improve performance.")
+        layout.addWidget(newOpt)
+
+        # X ray
+        xray = CToggleLabel("X-ray",
+                            SECTION,
+                            'blur:xray',
+                            'int',
+                            "if enabled, floating windows will ignore tiled windows in their blur. Only available if blur_new_optimizations is true. Will reduce overhead on floating blur significantly.")
+        layout.addWidget(xray)
+    
         return group
 
 
