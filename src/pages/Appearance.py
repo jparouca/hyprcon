@@ -21,7 +21,7 @@ class AppearancePage(QMainWindow):
         pageTitle.setAlignment(Qt.AlignmentFlag.AlignLeft)
 
         self.mainLayout.addWidget(pageTitle)
-        self.mainLayout.addWidget(self.appearanceGroup())
+        # self.mainLayout.addWidget(self.appearanceGroup())
         self.mainLayout.addWidget(self.antialiasingAndOpacityGroup())
         self.mainLayout.addWidget(self.shadowGroup())
         self.mainLayout.addWidget(self.dimGroup())
